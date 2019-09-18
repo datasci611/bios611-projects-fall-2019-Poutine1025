@@ -1,10 +1,10 @@
-####Yangjianchen Xu
+#### Yangjianchen Xu
 
-##Background
+## Background
 
 The data is provided by Urban Ministries of Durham, of which the people in this organization connect with the community to end homelessness and fight poverty by offering food, shelter and a future to neighbors in need. The data includes 79838 observations and 18 variables.
 
-##Questions
+## Questions
 
 - Does the amount of money provided to clients vary from year to year?
 - Is there any correlation between finacial support and the number of people in the family for which food was provided?
