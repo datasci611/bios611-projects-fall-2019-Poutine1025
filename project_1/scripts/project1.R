@@ -3,8 +3,8 @@ library(readr)
 library(ggplot2)
 library(lubridate)
 ##data import##
-UMD=read_tsv("~/Documents/GitHub/bios611-projects-fall-2019-Poutine1025/project_1/data/UMD_Services_Provided_20190719.tsv")
-metadata=read_tsv("~/Documents/GitHub/bios611-projects-fall-2019-Poutine1025/project_1/data/UMD_Services_Provided_metadata_20190719.tsv")
+UMD=read_tsv("../data/UMD_Services_Provided_20190719.tsv")
+metadata=read_tsv("../data/UMD_Services_Provided_metadata_20190719.tsv")
 
 ##data cleaning##
 UMD_selected=UMD %>% 
