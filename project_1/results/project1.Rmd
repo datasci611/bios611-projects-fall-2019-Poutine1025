@@ -16,14 +16,18 @@ library(readr)
 library(lubridate)
 ```
 ## Background
-The data is provided by Urban Ministries of Durham, of which the people in this organization connect with the community to end homelessness and fight poverty by offering food, shelter and a future to neighbors in need. The data includes 79838 observations and 18 variables.
+The programs of Urban Ministries of Durham (UMD) end homelessness by providing neighbors with emergency shelter and case management to help them overcome barriers such as unemployment, medical and mental health problems, past criminal convictions and addiction.
+
+The data is provided by UMD, including 79838 observations with 18 variables such as Date, Client File Number, Food Pounds and Clothing Items.
+
+The overall purpose is helping UMD determining the amount of food and clothing items they need to provide for the coming years.
 
 ## Data import
 ```{r message=FALSE, warning=FALSE}
 UMD=read_tsv("~/Documents/GitHub/bios611-projects-fall-2019-Poutine1025/project_1/data/UMD_Services_Provided_20190719.tsv")
 metadata=read_tsv("~/Documents/GitHub/bios611-projects-fall-2019-Poutine1025/project_1/data/UMD_Services_Provided_metadata_20190719.tsv")
 ```
-## Questions of interest
+## Related questions
 The basic questions I am interested in are
 
 * What is the relationship among Food Pounds, Clothing Items and Number of people in the family for which food was provided?
@@ -136,16 +140,14 @@ UMD_subset1=UMD_selected %>%
 ```
 
 After grouping, I plotted the scatterplots for 2 pairs of the variables and found some correlation.
-
 ```{r message=FALSE}
 #number vs food_mean
-ggplot(data=UMD_subset1,aes(x=number, y=food_mean)) +
+ggplot(data=UMD_subset1,aes(x=as.factor(number), y=food_mean)) +
   theme_linedraw() +
-  geom_point() +
-  geom_smooth(method = "lm", se = TRUE) +
-  labs(x="Food Provided for",
+  geom_boxplot() +
+  labs(x="Number of people per family",
        y="Average Food Pounds",
-       title = "Average Food Pounds vs Food Provided for")
+       title = "Average Food Pounds for different sizes of family")
 ```
 
 We can see this figure shows a stronger positive correlation between Average Food Pounds and Food Provided for.
@@ -155,8 +157,8 @@ We can see this figure shows a stronger positive correlation between Average Foo
 ggplot(data=UMD_subset1,aes(x=food, y=clothing)) +
   theme_linedraw() +
   geom_point() +
-  geom_smooth(aes(colour="gam")) +
-  geom_smooth(method = "lm", aes(colour="lm")) +
+  #geom_smooth(aes(colour="gam")) +
+  geom_smooth(method = "lm") +
   labs(x="Food Pounds",
        y="Clothing Items",
        title="Clothing Items vs Food Pounds")
@@ -181,7 +183,7 @@ Then we can plot the bar chart of Year and examine the distribution across month
 ggplot(data=UMD_subset2,aes(year)) +
   geom_bar(aes(fill=month)) +
   labs(x="Year",
-       title = "Bar chart of Year")
+       title = "The number of transactions from 2005 to 2018")
 ```
 
 We can see that the amount of records is increasing by year and they are distributed uniformly across months. The following two boxplots show the distributions of Food Pounds and Clothing Items across months.
@@ -191,13 +193,13 @@ ggplot(data = UMD_subset2, aes(x=month, y=clothing)) +
   geom_boxplot(outlier.colour = "red", outlier.shape = 1) +
   labs(x="Month",
        y="Clothing Items",
-       title = "Boxplot of Month and Clothing Items")
+       title = "Number of clothing items for different months")
 
 ggplot(data = UMD_subset2, aes(x=month, y=food)) +
   geom_boxplot(outlier.colour = "red", outlier.shape = 1) +
   labs(x="Month",
-       y="Clothing Items",
-       title = "Boxplot of Month and Food Pounds")
+       y="Food Pounds",
+       title = "Amount of food for different months")
 ```
 
 These two figures indicate the distributions of Food Pounds and Clothing Items are roughly the same across the months. 
@@ -215,7 +217,7 @@ ggplot(data = UMD_subset3, aes(x=year, y=food)) +
   geom_smooth(method = "lm") +
   labs(x="Year",
        y="Food Pounds",
-       title="Food Pounds vs Year from 2005 to 2018")
+       title="Food Pounds from 2005 to 2018")
 ```
 
 It was found that there seemed to be a linear relationship between Food Pounds and Year. Thus, we can predict the amount of Food Pounds by fitting a linear model to the data.
@@ -230,9 +232,10 @@ print(paste("The predicted value of Food Pounds of 2019 is", Food2019))
 
 ## Conclusion
 
-* There is a stronger positive correlation between Average Food Pounds and Food Provided for.
-* There is a stronger positive correlation between Food Pounds and Clothing Items.
-* The amount of records is increasing by year and they are distributed uniformly across months.
-* The distributions of Food Pounds and Clothing Items are roughly the same across the months.
-* There is a linear relationship between Food Pounds and Year.
-* The predicted value of Food Pounds of 2019 is around 157291.
+* The amount of food and year have a linear correlation.
+* The amount of food for the coming years can be predicted by this model.
+* It takes further work to predict the number of clothing item.
+* There is a positive correlation between Average Food Pounds and the size of family.
+* The number of transactions is increasing by year.
+* In each year, the number of transactions are roughly the same every month.
+* The distribution of food and clothing items are roughly the same for different months.
