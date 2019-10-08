@@ -10,7 +10,7 @@ The data is provided by Urban Ministries of Durham, of which the people in this 
 - How does time influence the amount of food and clothing items?
 - What is the amount of food need to be provided in 2019?
 
-Thus, date service was provided, money provided to clients, number of bus tickets and number of people in the family for which food was provided are variables that I think may be useful.
+Thus, Date, Client File Number, Food Pounds, Clothing Items and Number of people in the family for which food was provided are variables that I think may be useful.
 
 ## Analysis approach
 
