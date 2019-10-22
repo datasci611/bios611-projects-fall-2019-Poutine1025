@@ -18,5 +18,11 @@ UMD
 
 The data is provided by UMD, including 79838 observations with 18 variables such as Date, Client File Number, Food Pounds and Clothing Items.
 
+## Analysis approaches
+
+- Bar plot
+- Point plot
+- Linear regression
+
 ## Results
  https://poutine1025.shinyapps.io/project_2/
