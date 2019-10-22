@@ -8,7 +8,7 @@ The programs of Urban Ministries of Durham (UMD) end homelessness by providing n
 
 - What is the relationship among Food Pounds, Clothing Items and Number of people in the family for which food was provided?
 - How does time influence the amount of food and clothing items?
-- What is the amount of food need to be provided in 2019?
+- What is the amount of food need to be provided in a given future year?
 
 ## Audience
 
