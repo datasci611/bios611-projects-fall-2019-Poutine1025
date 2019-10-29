@@ -31,13 +31,13 @@ ui <- navbarPage("Project 2: UMD",
                      titlePanel("Find the relationship among variables"),
                      sidebarLayout(
                        sidebarPanel(
-                         radioButtons(inputId = "Xvariable", "Select a variable for X-axis:",
+                         radioButtons(inputId = "Xvariable", "Select a variable for X-axis:", selected = "Food Pounds",
                                       c("Food Pounds" = "Food Pounds",
                                         "Number of people per family" =  "Number of people per family",
                                         "Clothing Items" = "Clothing Items")
                                       ),
                          
-                         radioButtons(inputId = "Yvariable", "Select a variable for Y-axis:",
+                         radioButtons(inputId = "Yvariable", "Select a variable for Y-axis:", selected = "Number of people per family",
                                       c("Food Pounds" = "Food Pounds",
                                         "Number of people per family" =  "Number of people per family",
                                         "Clothing Items" = "Clothing Items")
@@ -46,7 +46,8 @@ ui <- navbarPage("Project 2: UMD",
                          textOutput(outputId = "description")
                        ),
                        mainPanel(
-                         plotOutput(outputId = "Rvariable")
+                         plotOutput(outputId = "Rvariable"),
+                         textOutput(outputId = "Rexplain")
                        )
                      )
                    )
@@ -61,14 +62,15 @@ ui <- navbarPage("Project 2: UMD",
                                       min = 2005, max = 2018, value = c(2005,2018)),
                           textOutput(outputId = "yearrange"),
                           
-                          checkboxGroupInput(inputId = "Month",  "Select month:",
+                          checkboxGroupInput(inputId = "Month",  "Select month:", selected = c(1,12),
                                              c("Jan" = 1, "Feb" = 2, "Mar" = 3, "Apr" = 4,
                                                "May" = 5, "Jun" = 6, "Jul" = 7, "Aug" = 8,
                                                "Sep" = 9, "Oct" = 10, "Nov" = 11, "Dec" = 12),
                                              )
                         ),
                         mainPanel(
-                          plotOutput(outputId = "Time")
+                          plotOutput(outputId = "Time"),
+                          textOutput(outputId = "Explain")
                         )
                       )
                     )
@@ -108,11 +110,16 @@ server <- function(input, output){
   output$Rvariable <- renderPlot({
     Vrelation(UMD_selected, Xvariable = input$Xvariable, Yvariable = input$Yvariable)
   })
+  output$Rexplain <- renderText("This graph display the relationship between different variables. Please choose the variables 
+                                you are interested as X and Y-axis.")
   
   output$yearrange <- renderText(paste("You have selected data from  ", input$Year[1], " to ", input$Year[2], "."))
   output$Time <- renderPlot({
     Timeplot(UMD_selected2, input$Year, input$Month)
   })
+  output$Explain <- renderText("This graph display the variation in the number of clients for each month throughout different years. You can
+                               selected the months and the range of year you  are interested to explore the relationship between the number of
+                                and time.")
   
   output$Fyear <- renderText(paste("You have  input year", input$Fyear, "."))
   output$lm <- renderPlot({
@@ -121,7 +128,7 @@ server <- function(input, output){
   output$explaination <- renderText({
     model_FoodvsYear=lm(`Food Pounds`~Year, UMD_selected3)
     Food=predict(model_FoodvsYear, newdata = data.frame(Year=input$Fyear))
-    paste("The predicted value of Food Pounds of ", input$Fyear, " is", Food, ".")
+    paste("We use a linear model to predict the value of Food pounds. The predicted value of Food Pounds of ", input$Fyear, " is", round(Food),".")
   })
 }
 
