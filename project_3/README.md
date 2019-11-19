@@ -18,5 +18,5 @@ The data is provided by UMD, including 79838 observations with 18 variables such
 
 ## Analysis approaches
 
-- Bar plot
 - Logistic regression
+- Hypothesis test
