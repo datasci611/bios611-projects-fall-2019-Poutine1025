@@ -1,0 +1,32 @@
+1. Is the project organized modularly, with Make as the workflow manager?
+- Yes, the project is organized very well organized modularly, with Make as the workflow manager.
+
+2. Does the project use both Python (Pandas specifically) and R (Tidyverse specifically) scripts?
+- Yes, you used Python (Pandas) for wrangling and R (Tidyverse) for visualization very well.
+
+3. Is Docker used to define execution environments appropriately?
+- Yes, the Dockerfile was used to define execution environments appropriately.
+
+4. Are the plots appropriate for the data types, the hypotheses being tested, and the points being communicated?
+- Yes, the plots are elegant and appropriate for the data types and the points are communicated.
+
+5. How can the project be organized or documented more clearly?
+- I guess adding a conclusion section and explaining how to use your project to serve the client better will make your project more clear and understandable.
+
+6. Is the purpose of the project communicated clearly?
+- Yes, I can find your purpose very easily in your readme.
+
+7. Does the purpose of the project make sense from the client’s point of view? How could the project better serve the client?
+- I found your purpose is very meaningful, but it seems that you have not discussed how to serve the client better using your results. I’m sure it is easy to add this part.
+
+8. Is the source of the data made clear? (Remember that this project can be part of your public portfolios, so people not familiar with UMD may see it).
+- Yes, the source of data is stated in readme.
+
+9. Is the interpretation of figures clearly explained?
+- Yes, the figures are well interpreted and easy to understand.
+
+10. Is the purpose and interpretation of analysis steps clearly communicated?
+- Yes, the analysis steps are organized in several sections, which is clear and easy to read.
+
+11. Are overall take-home messages clearly communicated?
+- Yes, all the take-home messages are clearly communicated.

@@ -1,0 +1,32 @@
+1. Is the project organized modularly, with Make as the workflow manager?
+- The project is organized well, but it seems that the Makefile has not been prepared yet. I'm sure you can finish it in your final project.
+
+2. Does the project use both Python (Pandas specifically) and R (Tidyverse specifically) scripts?
+- It seems that you only use R for data analysis and visualization. Thus, my suggestion will be that you can use Python (Pandas) for wrangling and R (Tidyverse) for visualization.
+
+3. Is Docker used to define execution environments appropriately?
+- The Dockerfile seems to be not prepared yet. Also, I’m sure you can finish it in your final project.
+
+4. Are the plots appropriate for the data types, the hypotheses being tested, and the points being communicated?
+- Yes, the plots are elegant and appropriate for the data types.
+
+5. How can the project be organized or documented more clearly?
+- To better communicate your conclusion to other people, a report is necessary. I think you can write a report to describe the goals, analysis steps and conclusions of your project.
+
+6. Is the purpose of the project communicated clearly?
+- Yes, I can find your purpose very easily in your readme.
+
+7. Does the purpose of the project make sense from the client’s point of view? How could the project better serve the client?
+- I found your purpose is very meaningful, but it seems that you have not discussed how to serve the client better using your results. I’m sure it is easy to add this part.
+
+8. Is the source of the data made clear? (Remember that this project can be part of your public portfolios, so people not familiar with UMD may see it).
+- Yes, the source of data is stated in readme.
+
+9. Is the interpretation of figures clearly explained?
+- Not yet, but I think the report you are going to write will include the interpretation of figures.
+
+10. Is the purpose and interpretation of analysis steps clearly communicated?
+- Not yet, I guess this part should also be in the report.
+
+11. Are overall take-home messages clearly communicated?
+- The goals are explained and the results are presented. Other messages can be include in report.
