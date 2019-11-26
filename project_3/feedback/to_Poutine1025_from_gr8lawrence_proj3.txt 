@@ -1,0 +1,15 @@
+Overall, the project is looking good: the question for the project is clearly stated,
+data wrangling is cleverly done using Pandas, and a Makefile and a Dockerfile has been
+written for facilitating the overall project. The final product is pretty much
+still in preparation so I will make suggestions based only on the finished parts.
+
+(1) Why interested in the veteran status of the clients? It could be a good modeling
+exercise but you might want to be a little more creative and find a good reason
+for doing this? (Hints: veterans are respected by many in America so maybe figuring
+out the clients' veteran status can suggest a better way to treat discharged veterans?)
+
+(2) Maybe go deeper into explaining how you are modeling the odds of being a veteran to
+a lay audience and why logistic regression is the chosen method?
+
+(3) Probably it is better to separate data into different folders. I made one for the
+raw data and another for the wrangled data just for the structure of the project.

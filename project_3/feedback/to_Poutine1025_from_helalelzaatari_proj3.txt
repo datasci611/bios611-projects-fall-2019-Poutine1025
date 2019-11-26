@@ -1,0 +1,28 @@
+1)Yes, the author included a Make file and it is working properly
+
+2) Yes, the author used python and the pandas package in order to wrangle the data
+and used R with tidyverse and ggplot.
+
+3)Yes there is a docker file and it is working porperly.
+
+4) Yes, the hypothesis was stated in the README as well as the points that was communicated
+it would helpful to include some comments before the ggplot code as to what relationship or
+hypothesis the author is trying to test. ( but it is obvious from the code what these hypothesis are
+but this would help people no familiar with how R or python works)
+
+5)The project is organized however, more comments should be added in all scripts.
+
+6)Yes the purpose was communicated in the README as the author posed a question.
+
+7)Yes, the client will definitely benefit from this data analysis as the author factors in various
+demographics and variables into his analysis.
+
+8)Yes the source was given the background of the interpretation. 
+
+9)The purpose of the figures is clear if you see it. However, it would be useful to comment in some
+interpretation at the end of each ggplot code.
+
+10) There was no comments but it was clear by reading the code. Comments would be helpful here.
+
+11) The take home messages are self-evident from the code. However, it would be better to add the take-home
+message in the README or comment it at the end of the R code.
