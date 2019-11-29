@@ -1,0 +1,165 @@
+---
+title: "Project 3"
+author: "Yangjianchen Xu"
+date: "11/28/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+# Import data
+Income=read_csv("../scripts/Income.csv")
+Disability=read_csv("../scripts/Disability.csv")
+Client=read_csv("../scripts/Client.csv")
+# Redefine the values of variable
+Client$Gender=ifelse(Client$Gender=="Trans Female (MTF or Male to Female)","TransF",Client$Gender)
+Client$Race=ifelse(Client$Race=="White (HUD)","White",Client$Race)
+Client$Race=ifelse(Client$Race=="Asian (HUD)","Asian",Client$Race)
+Client$Race=ifelse(Client$Race=="Black or African American (HUD)","African",Client$Race)
+Client$Race=ifelse(Client$Race=="American Indian or Alaska Native (HUD)","Indian",Client$Race)
+Client$Race=ifelse(Client$Race=="Native Hawaiian or Other Pacific Islander (HUD)","Hawaiian",Client$Race)
+Client$Ethnicity=ifelse(Client$Ethnicity=="Hispanic/Latino (HUD)","Latino","Non-Latino")
+Disability$Disability=ifelse(Disability$Disability=="Yes (HUD)",1,0)
+```
+
+## Background
+The programs of Urban Ministries of Durham (UMD) end homelessness by providing neighbors with emergency shelter and case management to help them overcome barriers such as unemployment, medical and mental health problems, past criminal convictions and addiction. The [data](https://github.com/biodatascience/datasci611/tree/gh-pages/data/project2_2019) from UMD contains the demographic (gender, age, race and ethnicity), income and disability information of the clients. By analyzing these data, we are able to reveal useful information for severing the client better.
+
+## Goals
+My project aims to solve the following questions:
+
+* What are the demographic characteristics of the clients?
+* How does the demographics influence the income of the clients?
+* How does the demogrophics influence the disability of the clients?
+
+In order to answer these questions, the variables we need are Client ID, Age, Gender, Race, Ethnicity, Income (monthly amount) and whether disable or not.
+
+## Wrangling
+Wrangling is done with Python and it contains following steps:
+
+* Remove missing values
+* Rename variables
+* Redefine the value of variables
+* Group the data by Client ID
+* Merge different dataset by Client ID
+
+After wrangling, the information of variables is listed below:
+
+-----------------------------------------------------
+Variabel      Value
+---------     ---------------------------------------
+Age           [18.00, 78.75]
+
+Gender        Female, Male, TransF
+
+Race          Indian, White, Asian, Hawaiian, African
+
+Ethnicity     Non-Latino, Latino
+-----------------------------------------------------
+
+## Demographic characteristics
+To answer the first question, I created several plots.
+
+```{r echo=FALSE, message=FALSE, out.width='50%'}
+#Race
+ggplot(data = Client, aes(x=Race)) +
+  geom_bar(aes(fill=Gender)) +
+  labs(title = "Sample sizes of different races") +
+  theme_linedraw()
+#Ethinity
+ggplot(data = Client, aes(x=Ethnicity)) +
+  geom_bar(aes(fill=Gender)) +
+  labs(title = "Sample sizes of different Ethnicities") +
+  theme_linedraw()
+```
+
+From these two plots we can see that most of the clients are African American and white and most of them are non-Latino. Besides, the following plots describe the distribution of age across gender, race and ethnicity.
+
+```{r echo=FALSE, message=FALSE, out.width='50%'}
+#Age vs Gender filled by Race
+ggplot(data = Client, aes(x=Gender, y=Age)) +
+  geom_boxplot(aes(fill=Race)) +
+  labs(title="Age vs Gender filled by Race") +
+  theme_light()
+#Age vs Gender filled by Ethnicity
+ggplot(data = Client, aes(x=Gender, y=Age)) +
+  geom_boxplot(aes(fill=Ethnicity)) +
+  labs(title="Age vs Gender filled by Ethnicity") +
+  theme_light()
+```
+
+The first plot shows that Asian and American Indian clients are most male and Trans female clients are all African American and white. The second plot show that all the trans female are non-Latino and the non-Latino are older than Latino in female.
+
+## Logistics regression
+Since disability of clients is a binary varible, we can use logistic regression to fit the data. Logistic regression assumes
+
+* [Distributional assumption] $y_i|x_i\sim B(n_i,\pi(x_i))$ for $i=1,2,...,N;$
+* [Structural assumption] $\pi(x_i)$ is related to $x_i$ by $$g_1(\pi(x_i))=logit(\pi(x_i))=\log(\frac{\pi(x_i)}{1-\pi(x_i)})=x_{i}^{T}\beta$$ for $i=1,2,...,N$
+
+The fitted are presented below:
+
+--------------------------------------------------------------------------------
+Variable                  Estimate      Std. Error    z value    Pr(>|z|)    
+---------                 ----------    -----------   --------  -------------
+(Intercept)               -4.011985     1.470995      -2.727     0.006384 ** 
+
+GenderMale                -0.770311     0.216020      -3.566     0.000363 ***
+
+GenderTransFemale         -13.729304    901.387439    -0.015     0.987848    
+
+RaceAsian                  3.327197     1.599604       2.080     0.037524 *  
+
+RaceAfrican                0.708496     1.022240       0.693     0.488258    
+
+RaceHawaiian              -12.586450    753.695434    -0.017     0.986676    
+
+RaceWhite                  0.067444     1.047193       0.064     0.948648   
+
+EthnicityNon-Latino        0.571838     1.023963       0.558     0.576533  
+
+Age                        0.006548     0.008062       0.812     0.416732 
+--------------------------------------------------------------------------------
+
+Thus, the effect of genser male is significant at 0.001 level and the effect of Race Asian is significant at 0.05 level, which means male are less likely to be disabled than female and Asian are more likely to be disabled than American Indian.
+
+## Inverse Gaussian regression
+To describe the relationship between variables and income, I fit a inverse Gaussian regression to the data. Inverse Gaussian regression assumes
+
+* [Distributional assumption] $y_i\sim IG(\mu_i,lambda)$ for $i=1,2,...,N;$
+* [Structural assumption] $\mu_i$ is related to $x_i$ by $$g(\mu_i)=x_{i}^{T}\beta=\eta_i$$ for $i=1,2,...,N$
+
+Here, we used the canonical link.
+
+--------------------------------------------------------------------------------
+Variable                 Estimate    Std. Error   t value   Pr(>|t|)   
+-------------------     ----------   ----------   -------   -----------
+(Intercept)              8.890e-07   3.254e-07     2.732    0.00638 **
+
+GenderMale              -2.653e-07   9.196e-08    -2.885    0.00398 **
+
+GenderTransF             1.990e-06   1.296e-06     1.536    0.12493   
+
+RaceAfrican              3.451e-07   2.366e-07     1.459    0.14491   
+
+RaceHawaiian             1.644e-06   1.262e-06     1.303    0.19272 
+
+RaceWhite                3.809e-07   2.461e-07     1.548    0.12199 
+
+EthnicityNon-Latino      2.900e-07   2.044e-07     1.419    0.15619  
+
+Age                     -3.655e-09   2.897e-09    -1.262    0.20738
+--------------------------------------------------------------------------------
+
+Thus, the effect of gender male is significant at 0.01 level, which means male have less income than female.
+
+## Conclusion
+
+* Most of the clients are African American and white.
+* Most of the clients are non-Latino.
+* Asian and American Indian clients are most male.
+* Trans female clients are all African American and white.
+* All the trans female are non-Latino.
+* The non-Latino are older than Latino in female.
+* Male are less likely to be disabled than female.
+* Asian are more likely to be disabled than American Indian.
+* Male have less income than female.
