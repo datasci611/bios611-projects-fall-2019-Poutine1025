@@ -6,7 +6,9 @@ The programs of Urban Ministries of Durham (UMD) end homelessness by providing n
 
 ## Questions
 
-- Will covariates such as Age, Gender, Race and Ethnicity have an influence on the probability of being a veteran?
+- What are the demographic characteristics of the clients?
+- How do demographics affect the disability of the clients?
+- How do demographics affect the income of the clients?
 
 ## Audience
 
@@ -14,9 +16,9 @@ UMD
 
 ## Data
 
-The data is provided by UMD, including 79838 observations with 18 variables such as Date, Client File Number, Food Pounds and Clothing Items.
+The [data](https://github.com/biodatascience/datasci611/tree/gh-pages/data/project2_2019) from UMD contain the demographics (gender, age, race and ethnicity), income, disability and other information of the clients.
 
 ## Analysis approaches
 
 - Logistic regression
-- Hypothesis test
+- Inverse Gaussian regression
