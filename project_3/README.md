@@ -6,8 +6,8 @@ The programs of Urban Ministries of Durham (UMD) end homelessness by providing n
 
 ## Questions
 
-- What are the demographic characteristics of the clients?
-- How do demographics affect the disability of the clients?
+- What are the demographic characteristics of the clients?
+- How do demographics affect the disability of the clients?
 - How do demographics affect the income of the clients?
 
 ## Audience
